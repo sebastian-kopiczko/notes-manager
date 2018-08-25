@@ -10,13 +10,16 @@ export const ItemCtrl = (function(){
   // data structure and state
   const data = {
     items: [
-      {id: 0, title: 'Test note 1 title', body: 'Test note 1 body', priority: 'low', date: '2018-08-20'},
-      {id: 1, title: 'Test note 2 title', body: 'Test note 2 body', priority: 'high', date: '2018-08-22'}
+      {id: 0, title: 'Test note 1 title', body: 'Test note 1 body', priority: 'low', dueDate: '2018-08-20'},
+      {id: 1, title: 'Test note 2 title', body: 'Test note 2 body', priority: 'high', dueDate: '2018-08-22'}
     ],
     currentItem: null
   }
 
   return {
+    getItems: function(){
+      return data.items;
+    },
     logData: function(){
       return data;
     }

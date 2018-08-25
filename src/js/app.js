@@ -8,7 +8,10 @@ const App = (function(ItemCtrl, UICtrl){
   
   return {
     init: function(){
-      console.log('init app')
+      // get items from data structure
+      const items = ItemCtrl.getItems();
+
+      UICtrl.createItemsList(items);
     }
   }
 
