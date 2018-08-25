@@ -1,20 +1,35 @@
 import "../../node_modules/picnic/picnic.min.css";
 import "../styles/app.css";
 
-import { ItemCtrl } from './item';
+import { NoteCtrl } from './note';
 import { UICtrl } from './ui';
 
-const App = (function(ItemCtrl, UICtrl){
-  
+const App = (function(NoteCtrl, UICtrl){
+ const initEventListeners = function(){
+   const UISelectors = UICtrl.getSelectors();
+
+   document.querySelector(UISelectors.addButton).addEventListener('click', itemAddSubmit);
+ }
+ 
+ const itemAddSubmit = function(e){
+   const input = UICtrl.getNotesInput();
+   if(input.title !== '' || input.body !== '' || input.priority !== '' || input.date !== ''){
+     const newItem = NoteCtrl.addNote(input.title, input.body, input.priority, input.date);
+   }
+   console.log(NoteCtrl.getNotes())
+   e.preventDefault();
+ }
   return {
     init: function(){
       // get items from data structure
-      const items = ItemCtrl.getItems();
+      const notes = NoteCtrl.getNotes();
+  
+      UICtrl.createNotesList(notes);
 
-      UICtrl.createItemsList(items);
+      initEventListeners();
     }
   }
 
-})(ItemCtrl, UICtrl);
+})(NoteCtrl, UICtrl);
 
 App.init();
