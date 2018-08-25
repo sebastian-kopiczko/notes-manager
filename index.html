@@ -1,33 +1,77 @@
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="shortcut icon" href="" type="image/x-icon">
+  <link rel="shortcut icon" href="#">
   <title>Menadżer notatek</title>
 </head>
+
 <body>
-  <div class="flex one two-500 six-800">
-    <div>
-      <article class="card">
-        <header>
-          <h3>Dodaj notatkę / Edytuj</h3>
-        </header>
-        <div class="card__body">
-          <fieldset>
-            <label for="note-title">
-              <input type="text" id="note-title" placeholder="Tytuł notatki">
-            </label>
-            <label for="note-body">
-              <input type="text" id="note-body" placeholder="Treść">
-            </label>
-          </fieldset>  
+  <nav>
+    <a href="#" class="brand">
+      <h3>Notes Manager</h3>
+    </a>
+  </nav>
+  <div class="flex one">
+    <article class="card">
+      <header>
+        <h3>Dodaj notatkę / Edytuj</h3>
+      </header>
+      <fieldset>
+        <div class="flex one two-500">
+          <div>
+            <div class="input-field">
+              <label for="note-title">
+                <input type="text" id="note-title" placeholder="Tytuł notatki">
+              </label>
+            </div>
+            <div class="input-field">
+              <select name="" id="note-priority">
+                <option disabled selected>Wybierz priorytet</option>
+                <option>niski</option>
+                <option>średni</option>
+                <option>wysoki</option>
+              </select>
+            </div>
+            <div class="input-field">
+              <input id="date" type="date" value="2018-08-25">
+            </div>
+          </div>
+          <div>
+            <div class="input-field">
+              <textarea id="note-body" placeholder="Treść"></textarea>
+            </div>
+          </div>
+          <div class="full buttons">
+            <button class='add-button success'>Add note</button>
+            <button class='update-button'>Update</button>
+            <button class='delete-button error'>Delete</button>
+            <button class='back-button warnings'>Back</button>
+          </div>
         </div>
-      </article>
-    </div>
+      </fieldset>
+    </article>
   </div>
-  <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis molestias quae accusantium quaerat amet, neque veritatis perferendis. Porro, quasi earum.</p>
+  <div class="notes">
+    <ul class="notes-list list">
+      <li class="list-item">
+        <div class="card">
+          <header>
+            <h3 class="list-item__heading">Note title</h3><span class="label">low</span><span class="label date">2018-08-29</span>
+          </header>
+          <p class="list-item__body">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolores fuga ullam quasi nulla, earum molestiae.</p>
+          <footer>
+            <a href="#" class="button success edit-item">edit</a>
+            <a href="#" class="button error delete-item">delete</a>
+          </footer>
+        </div>  
+      </li>
+    </ul>
+  </div>
   <script src="build/app.bundle.js"></script>
 </body>
+
 </html>

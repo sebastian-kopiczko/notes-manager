@@ -1,0 +1,22 @@
+body {
+  margin: 4.6em 1em 1em 1em;
+
+}
+.buttons > button:not(:first-child){
+  margin-left: 0.5em;
+}
+.card {
+  padding: 0 0.5em;
+}
+.input-field {
+  margin: 0.5em 0;
+}
+.list{
+  padding: 0;
+}
+.list-item {
+  list-style: none;
+}
+.list-item .button {
+  font-size: 0.75em;
+}
