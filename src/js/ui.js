@@ -10,7 +10,6 @@ export const UICtrl = (function(){
   const getTodayDate = function(){
     const dateNow = new Date();
     let dateUTC = new Date(Date.UTC(dateNow.getFullYear(), dateNow.getMonth(), dateNow.getDate()))
-    // return dateUTC.toISOString().slice(0, 10).replace(/-/g, '');
     return dateUTC.toISOString().slice(0, 10);
   }
   return {
@@ -44,7 +43,6 @@ export const UICtrl = (function(){
         `   
       });
       const list = document.getElementById('notes-list');
-      console.log(list);
       list.insertAdjacentHTML('afterbegin', html);
     },
     addNote: function(note){
@@ -52,8 +50,6 @@ export const UICtrl = (function(){
       const li = document.createElement('li');
       li.className = 'list-item card';
       li.id = `note-${note.id}`;
-      console.log(li); 
-      console.log(list); 
       li.innerHTML = `
         <header>
           <h3 class="list-item__heading">${note.title}</h3>

@@ -1,10 +1,11 @@
 import "../../node_modules/picnic/picnic.min.css";
 import "../styles/app.css";
 
+import { StorageCtrl } from './storage';
 import { NoteCtrl } from './note';
 import { UICtrl } from './ui';
 
-const App = (function(NoteCtrl, UICtrl){
+const App = (function(NoteCtrl, StorageCtrl, UICtrl){
   const initEventListeners = function(){
     const UISelectors = UICtrl.getSelectors();
 
@@ -13,15 +14,14 @@ const App = (function(NoteCtrl, UICtrl){
  
   const itemAddSubmit = function(e){
     const input = UICtrl.getNotesInput();
-    console.log(input)
     if(input.title === '' || input.body === ''){
       alert('Uzupelnij tytul i tresc notatki');
     } else {
-      const newItem = NoteCtrl.addNote(input.title, input.body, input.priority, input.date);
+      const newNote = NoteCtrl.addNote(input.title, input.body, input.priority, input.date);
       UICtrl.clearInputs();
-      UICtrl.addNote(newItem);
+      UICtrl.addNote(newNote);
+      StorageCtrl.storeNote(newNote);
     }
-    console.log(NoteCtrl.getNotes())
     e.preventDefault();
   }
 
@@ -36,6 +36,6 @@ const App = (function(NoteCtrl, UICtrl){
     }
   }
 
-})(NoteCtrl, UICtrl);
+})(NoteCtrl, StorageCtrl, UICtrl);
 
 App.init();
