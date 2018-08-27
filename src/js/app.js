@@ -15,9 +15,9 @@ const App = (function(NoteCtrl, UICtrl){
     const input = UICtrl.getNotesInput();
     if(input.title !== '' || input.body !== '' || input.priority !== '' || input.date !== ''){
       const newItem = NoteCtrl.addNote(input.title, input.body, input.priority, input.date);
-
+      console.log(newItem)
       UICtrl.clearInputs();
-      // UICtrl.addNote(newItem);
+      UICtrl.addNote(newItem);
     }
     console.log(NoteCtrl.getNotes())
     e.preventDefault();

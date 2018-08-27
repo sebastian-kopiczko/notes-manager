@@ -4,7 +4,8 @@ export const UICtrl = (function(){
     priorityInput: '#priority-input',
     dateInput: '#date-input',
     bodyInput: '#body-input',
-    addButton: '.add-button'
+    addButton: '.add-button',
+    notesList: '#notes-list'
   }
   const getTodayDate = function(){
     const dateNow = new Date();
@@ -24,17 +25,17 @@ export const UICtrl = (function(){
         body: document.querySelector(selectors.bodyInput).value
       }
     },
-    createNotesList: function(items){
+    createNotesList: function(notes){
       let html = '';
-      items.forEach(item => {
+      notes.forEach(note => {
         html += `
           <li class="list-item card">
             <header>
-              <h3 class="list-item__heading">${item.title}</h3>
-              <span class="label">${item.priority}</span>
-              <span class="label date">${item.date}</span>
+              <h3 class="list-item__heading">${note.title}</h3>
+              <span class="label">${note.priority}</span>
+              <span class="label date">${note.date}</span>
             </header>
-            <p class="list-item__body">${item.body}</p>
+            <p class="list-item__body">${note.body}</p>
             <footer>
               <a href="#" class="button success edit-item">edit</a>
               <a href="#" class="button error delete-item">delete</a>
@@ -45,6 +46,26 @@ export const UICtrl = (function(){
       const list = document.getElementById('notes-list');
       console.log(list);
       list.insertAdjacentHTML('afterbegin', html);
+    },
+    addNote: function(note){
+      const list = document.querySelector(selectors.notesList);
+      const li = document.createElement('li');
+      li.className = 'list-item card';
+      console.log(li); 
+      console.log(list); 
+      li.innerHTML = `
+        <header>
+          <h3 class="list-item__heading">${note.title}</h3>
+          <span class="label">${note.priority}</span>
+          <span class="label date">${note.date}</span>
+        </header>
+        <p class="list-item__body">${note.body}</p>
+        <footer>
+          <a href="#" class="button success edit-item">edit</a>
+          <a href="#" class="button error delete-item">delete</a>
+        </footer>
+      `
+      list.insertAdjacentElement('beforeend', li);
     },
     clearInputs: function(){
       document.querySelector(selectors.titleInput).value = '';
