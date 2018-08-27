@@ -5,20 +5,24 @@ import { NoteCtrl } from './note';
 import { UICtrl } from './ui';
 
 const App = (function(NoteCtrl, UICtrl){
- const initEventListeners = function(){
-   const UISelectors = UICtrl.getSelectors();
+  const initEventListeners = function(){
+    const UISelectors = UICtrl.getSelectors();
 
-   document.querySelector(UISelectors.addButton).addEventListener('click', itemAddSubmit);
- }
+    document.querySelector(UISelectors.addButton).addEventListener('click', itemAddSubmit);
+  }
  
- const itemAddSubmit = function(e){
-   const input = UICtrl.getNotesInput();
-   if(input.title !== '' || input.body !== '' || input.priority !== '' || input.date !== ''){
-     const newItem = NoteCtrl.addNote(input.title, input.body, input.priority, input.date);
-   }
-   console.log(NoteCtrl.getNotes())
-   e.preventDefault();
- }
+  const itemAddSubmit = function(e){
+    const input = UICtrl.getNotesInput();
+    if(input.title !== '' || input.body !== '' || input.priority !== '' || input.date !== ''){
+      const newItem = NoteCtrl.addNote(input.title, input.body, input.priority, input.date);
+
+      UICtrl.clearInputs();
+      // UICtrl.addNote(newItem);
+    }
+    console.log(NoteCtrl.getNotes())
+    e.preventDefault();
+  }
+
   return {
     init: function(){
       // get items from data structure

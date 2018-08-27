@@ -6,6 +6,12 @@ export const UICtrl = (function(){
     bodyInput: '#body-input',
     addButton: '.add-button'
   }
+  const getTodayDate = function(){
+    const dateNow = new Date();
+    let dateUTC = new Date(Date.UTC(dateNow.getFullYear(), dateNow.getMonth(), dateNow.getDate()))
+    // return dateUTC.toISOString().slice(0, 10).replace(/-/g, '');
+    return dateUTC.toISOString().slice(0, 10);
+  }
   return {
     getSelectors: function(){
       return selectors;
@@ -39,6 +45,12 @@ export const UICtrl = (function(){
       const list = document.getElementById('notes-list');
       console.log(list);
       list.insertAdjacentHTML('afterbegin', html);
+    },
+    clearInputs: function(){
+      document.querySelector(selectors.titleInput).value = '';
+      document.querySelector(selectors.bodyInput).value = '';
+      document.querySelector(selectors.priorityInput).options[0].selected = true;
+      document.querySelector(selectors.dateInput).value = getTodayDate();
     }
   }
 })();
