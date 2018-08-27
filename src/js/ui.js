@@ -89,8 +89,8 @@ export const UICtrl = (function(){
       const note = NoteCtrl.getCurrentNote();
       document.querySelector(selectors.titleInput).value = note.title;
       document.querySelector(selectors.bodyInput).value = note.body;
-      // todo => select option and date parse to yyyy-mm-dd
-
+      document.querySelector(selectors.priorityInput).value = note.priority;
+      document.querySelector(selectors.dateInput).value = note.date;
 
       UICtrl.showEditState();
     },
