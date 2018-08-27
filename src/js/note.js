@@ -45,6 +45,9 @@ export const NoteCtrl = (function(){
     setCurrentNote: function(note){
       data.currentNote = note;
     },
+    getCurrentNote: function(){
+      return data.currentNote;
+    },
     logData: function(){
       return data;
     }

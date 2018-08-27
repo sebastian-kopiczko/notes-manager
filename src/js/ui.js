@@ -1,3 +1,5 @@
+import { NoteCtrl } from "./note";
+
 export const UICtrl = (function(){
   const selectors = {
     nav: 'nav',
@@ -70,12 +72,33 @@ export const UICtrl = (function(){
       list.insertAdjacentElement('beforeend', li);
       document.querySelector(selectors.notesList).style.display = 'block';
     },
+    showEditState: function(){
+      UICtrl.showElement(selectors.updateButton, 'inline-block');
+      UICtrl.showElement(selectors.deleteButton, 'inline-block');
+      UICtrl.showElement(selectors.backButton, 'inline-block');
+      UICtrl.hideElement(selectors.addButton);
+    },
     clearEditState: function(){
       UICtrl.clearInputs();
       UICtrl.hideElement(selectors.updateButton);
       UICtrl.hideElement(selectors.deleteButton);
       UICtrl.hideElement(selectors.backButton);
       UICtrl.showElement(selectors.addButton, 'inline-block');
+    },
+    setInputsToEdit(){
+      const note = NoteCtrl.getCurrentNote();
+      document.querySelector(selectors.titleInput).value = note.title;
+      document.querySelector(selectors.bodyInput).value = note.body;
+      // todo => select option and date parse to yyyy-mm-dd
+
+
+      UICtrl.showEditState();
+    },
+    clearInputs: function(){
+      document.querySelector(selectors.titleInput).value = '';
+      document.querySelector(selectors.bodyInput).value = '';
+      document.querySelector(selectors.priorityInput).options[0].selected = true;
+      document.querySelector(selectors.dateInput).value = getTodayDate();
     },
     showAlert(className, alertText){
       const nav = document.querySelector(selectors.nav);
@@ -93,13 +116,6 @@ export const UICtrl = (function(){
         alert.remove();
       }
     },
-    clearInputs: function(){
-      document.querySelector(selectors.titleInput).value = '';
-      document.querySelector(selectors.bodyInput).value = '';
-      document.querySelector(selectors.priorityInput).options[0].selected = true;
-      document.querySelector(selectors.dateInput).value = getTodayDate();
-    },
-
     showElement: function(elem, displayStyle){
       document.querySelector(elem).style.display = displayStyle;
     },

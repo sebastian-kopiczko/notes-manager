@@ -34,10 +34,10 @@ const App = (function(NoteCtrl, StorageCtrl, UICtrl){
     if(e.target.classList.contains('edit-note')){
       const noteIdArr = e.target.parentNode.parentNode.id.split('-');
       const noteId = parseInt(noteIdArr[1]);
-      console.log(noteId);
       const noteToEdit = NoteCtrl.getNoteById(noteId);
-      console.log(noteToEdit);
+      
       NoteCtrl.setCurrentNote(noteToEdit);
+      UICtrl.setInputsToEdit();
     }
     e.preventDefault();
   }
