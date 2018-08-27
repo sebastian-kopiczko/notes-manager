@@ -11,6 +11,15 @@ export const StorageCtrl = (function () {
         notes.push(note);
         localStorage.setItem('notes', JSON.stringify(notes));
       }
+    },
+    getStorageNotes: function(){
+      let notes;
+      if(localStorage.getItem('notes') === null) {
+        notes = [];
+      } else {
+        notes = JSON.parse(localStorage.getItem('notes'));
+      }
+      return notes;
     }
   }
 })();
