@@ -32,7 +32,12 @@ const App = (function(NoteCtrl, StorageCtrl, UICtrl){
 
   const noteEditClick = function(e){
     if(e.target.classList.contains('edit-note')){
-      console.log(`editing note`)
+      const noteIdArr = e.target.parentNode.parentNode.id.split('-');
+      const noteId = parseInt(noteIdArr[1]);
+      console.log(noteId);
+      const noteToEdit = NoteCtrl.getNoteById(noteId);
+      console.log(noteToEdit);
+      NoteCtrl.setCurrentNote(noteToEdit);
     }
     e.preventDefault();
   }

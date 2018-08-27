@@ -33,6 +33,18 @@ export const NoteCtrl = (function(){
     getNotes: function(){
       return data.notes;
     },
+    getNoteById: function(id){
+      let matchNote = null;
+      data.notes.forEach(note => {
+        if(note.id == id){
+          matchNote = note;
+        }
+      });
+      return matchNote;
+    },
+    setCurrentNote: function(note){
+      data.currentNote = note;
+    },
     logData: function(){
       return data;
     }
