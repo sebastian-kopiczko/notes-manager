@@ -13,9 +13,11 @@ const App = (function(NoteCtrl, UICtrl){
  
   const itemAddSubmit = function(e){
     const input = UICtrl.getNotesInput();
-    if(input.title !== '' || input.body !== '' || input.priority !== '' || input.date !== ''){
+    console.log(input)
+    if(input.title === '' || input.body === ''){
+      alert('Uzupelnij tytul i tresc notatki');
+    } else {
       const newItem = NoteCtrl.addNote(input.title, input.body, input.priority, input.date);
-      console.log(newItem)
       UICtrl.clearInputs();
       UICtrl.addNote(newItem);
     }

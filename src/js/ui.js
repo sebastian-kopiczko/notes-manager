@@ -29,7 +29,7 @@ export const UICtrl = (function(){
       let html = '';
       notes.forEach(note => {
         html += `
-          <li class="list-item card">
+          <li class="list-item card" id="note-${note.id}">
             <header>
               <h3 class="list-item__heading">${note.title}</h3>
               <span class="label">${note.priority}</span>
@@ -51,6 +51,7 @@ export const UICtrl = (function(){
       const list = document.querySelector(selectors.notesList);
       const li = document.createElement('li');
       li.className = 'list-item card';
+      li.id = `note-${note.id}`;
       console.log(li); 
       console.log(list); 
       li.innerHTML = `
