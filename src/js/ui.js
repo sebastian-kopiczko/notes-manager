@@ -6,8 +6,11 @@ export const UICtrl = (function(){
     priorityInput: '#priority-input',
     dateInput: '#date-input',
     bodyInput: '#body-input',
+    notesList: '#notes-list',
     addButton: '.add-button',
-    notesList: '#notes-list'
+    updateButton: '.update-button',
+    deleteButton: '.delete-button',
+    backButton: '.back-button'
   }
   const getTodayDate = function(){
     const dateNow = new Date();
@@ -38,8 +41,8 @@ export const UICtrl = (function(){
             </header>
             <p class="list-item__body">${note.body}</p>
             <footer>
-              <a href="#" class="button success edit-item">edit</a>
-              <a href="#" class="button error delete-item">delete</a>
+              <a href="#" class="button success edit-note">edit</a>
+              <a href="#" class="button error delete-note">delete</a>
             </footer>
           </li>
         `   
@@ -60,12 +63,19 @@ export const UICtrl = (function(){
         </header>
         <p class="list-item__body">${note.body}</p>
         <footer>
-          <a href="#" class="button success edit-item">edit</a>
-          <a href="#" class="button error delete-item">delete</a>
+          <a href="#" class="button success edit-note">edit</a>
+          <a href="#" class="button error delete-note">delete</a>
         </footer>
       `
       list.insertAdjacentElement('beforeend', li);
       document.querySelector(selectors.notesList).style.display = 'block';
+    },
+    clearEditState: function(){
+      UICtrl.clearInputs();
+      UICtrl.hideElement(selectors.updateButton);
+      UICtrl.hideElement(selectors.deleteButton);
+      UICtrl.hideElement(selectors.backButton);
+      UICtrl.showElement(selectors.addButton, 'inline-block');
     },
     showAlert(className, alertText){
       const nav = document.querySelector(selectors.nav);
@@ -74,7 +84,7 @@ export const UICtrl = (function(){
       alertDiv.appendChild(document.createTextNode(alertText));
       nav.insertAdjacentElement('afterend', alertDiv);
       setTimeout(()=>{
-        this.clearAlert();
+        UICtrl.clearAlert();
       }, 2500)
     },
     clearAlert(){
@@ -89,8 +99,12 @@ export const UICtrl = (function(){
       document.querySelector(selectors.priorityInput).options[0].selected = true;
       document.querySelector(selectors.dateInput).value = getTodayDate();
     },
-    hideList: function(){
-      document.querySelector(selectors.notesList).style.display = 'none';
+
+    showElement: function(elem, displayStyle){
+      document.querySelector(elem).style.display = displayStyle;
+    },
+    hideElement: function(elem){
+      document.querySelector(elem).style.display = 'none';
     }
   }
 })();

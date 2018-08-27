@@ -10,6 +10,7 @@ const App = (function(NoteCtrl, StorageCtrl, UICtrl){
     const UISelectors = UICtrl.getSelectors();
 
     document.querySelector(UISelectors.addButton).addEventListener('click', itemAddSubmit);
+    document.querySelector(UISelectors.notesList).addEventListener('click', noteEditClick);
   }
  
   const itemAddSubmit = function(e){
@@ -29,12 +30,19 @@ const App = (function(NoteCtrl, StorageCtrl, UICtrl){
     e.preventDefault();
   }
 
+  const noteEditClick = function(e){
+    if(e.target.classList.contains('edit-note')){
+      console.log(`editing note`)
+    }
+    e.preventDefault();
+  }
   return {
     init: function(){
+      UICtrl.clearEditState();
       // get items from data structure
       const notes = NoteCtrl.getNotes();
       if(notes.length === 0){
-        UICtrl.hideList();
+        UICtrl.hideElement('#notes-list');
       } else{
         UICtrl.createNotesList(notes);
       }
