@@ -14,13 +14,17 @@ const App = (function(NoteCtrl, StorageCtrl, UICtrl){
  
   const itemAddSubmit = function(e){
     const input = UICtrl.getNotesInput();
-    if(input.title === '' || input.body === ''){
-      alert('Uzupelnij tytul i tresc notatki');
-    } else {
+    if(input.title === ''){
+      UICtrl.showAlert('error', 'Wprowadz tytul notatki')
+    } else if(input.body === ''){
+      UICtrl.showAlert('error', 'Wprowadz tresc notatki')
+    } 
+    else {
       const newNote = NoteCtrl.addNote(input.title, input.body, input.priority, input.date);
       UICtrl.clearInputs();
       UICtrl.addNote(newNote);
       StorageCtrl.storeNote(newNote);
+      UICtrl.showAlert('success', 'Notatka dodana pomyslnie')
     }
     e.preventDefault();
   }
@@ -29,9 +33,11 @@ const App = (function(NoteCtrl, StorageCtrl, UICtrl){
     init: function(){
       // get items from data structure
       const notes = NoteCtrl.getNotes();
-  
-      UICtrl.createNotesList(notes);
-
+      if(notes.length === 0){
+        UICtrl.hideList();
+      } else{
+        UICtrl.createNotesList(notes);
+      }
       initEventListeners();
     }
   }

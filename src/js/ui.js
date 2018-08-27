@@ -1,5 +1,7 @@
 export const UICtrl = (function(){
   const selectors = {
+    nav: 'nav',
+    alert: '.alert',
     titleInput: '#title-input',
     priorityInput: '#priority-input',
     dateInput: '#date-input',
@@ -63,12 +65,32 @@ export const UICtrl = (function(){
         </footer>
       `
       list.insertAdjacentElement('beforeend', li);
+      document.querySelector(selectors.notesList).style.display = 'block';
+    },
+    showAlert(className, alertText){
+      const nav = document.querySelector(selectors.nav);
+      const alertDiv = document.createElement('div');
+      alertDiv.className = (`alert label ${className}`);
+      alertDiv.appendChild(document.createTextNode(alertText));
+      nav.insertAdjacentElement('afterend', alertDiv);
+      setTimeout(()=>{
+        this.clearAlert();
+      }, 2500)
+    },
+    clearAlert(){
+      const alert = document.querySelector(selectors.alert);
+      if(alert){
+        alert.remove();
+      }
     },
     clearInputs: function(){
       document.querySelector(selectors.titleInput).value = '';
       document.querySelector(selectors.bodyInput).value = '';
       document.querySelector(selectors.priorityInput).options[0].selected = true;
       document.querySelector(selectors.dateInput).value = getTodayDate();
+    },
+    hideList: function(){
+      document.querySelector(selectors.notesList).style.display = 'none';
     }
   }
 })();
