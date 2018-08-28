@@ -10,8 +10,9 @@ const App = (function(NoteCtrl, StorageCtrl, UICtrl){
     const UISelectors = UICtrl.getSelectors();
 
     document.querySelector(UISelectors.addButton).addEventListener('click', itemAddSubmit);
-    document.querySelector(UISelectors.notesList).addEventListener('click', noteEditClick);
     document.querySelector(UISelectors.updateButton).addEventListener('click', noteUpdateSubmit);
+    document.querySelector(UISelectors.notesList).addEventListener('click', noteEditClick);
+    document.querySelector(UISelectors.deleteButton).addEventListener('click', noteDeleteClick);
     document.querySelector(UISelectors.backButton).addEventListener('click', UICtrl.clearEditState);
   }
  
@@ -49,6 +50,12 @@ const App = (function(NoteCtrl, StorageCtrl, UICtrl){
     const updatedNote = NoteCtrl.updateNote(noteInput.title, noteInput.body, noteInput.priority, noteInput.date);
     UICtrl.updateNoteListItem(updatedNote);
     UICtrl.clearEditState();
+    e.preventDefault();
+  }
+
+  const noteDeleteClick = function(e){
+    console.log(1)
+    
     e.preventDefault();
   }
 

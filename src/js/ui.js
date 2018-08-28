@@ -45,7 +45,6 @@ export const UICtrl = (function(){
             <p class="list-item__body">${note.body}</p>
             <footer>
               <a href="#" class="button success edit-note">edit</a>
-              <a href="#" class="button error delete-note">delete</a>
             </footer>
           </li>
         `   
@@ -67,7 +66,6 @@ export const UICtrl = (function(){
         <p class="list-item__body">${note.body}</p>
         <footer>
           <a href="#" class="button success edit-note">edit</a>
-          <a href="#" class="button error delete-note">delete</a>
         </footer>
       `
       list.insertAdjacentElement('beforeend', li);
