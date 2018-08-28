@@ -47,6 +47,7 @@ const App = (function(NoteCtrl, StorageCtrl, UICtrl){
     const noteInput = UICtrl.getNotesInput();
     const updatedNote = NoteCtrl.updateNote(noteInput.title, noteInput.body, noteInput.priority, noteInput.date);
     UICtrl.updateNoteListItem(updatedNote);
+    UICtrl.clearEditState();
     e.preventDefault();
   }
   return {
