@@ -52,7 +52,7 @@ export const UICtrl = (function(){
       const list = document.getElementById('notes-list');
       list.insertAdjacentHTML('afterbegin', html);
     },
-    addNote: function(note){
+    addNoteListItem: function(note){
       const list = document.querySelector(selectors.notesList);
       const li = document.createElement('li');
       li.className = 'list-item card';
@@ -70,6 +70,11 @@ export const UICtrl = (function(){
       `
       list.insertAdjacentElement('beforeend', li);
       document.querySelector(selectors.notesList).style.display = 'block';
+    },
+    deleteNoteListItem: function(id){
+      const noteId = `#note-${id}`;
+      const noteToDelete = document.querySelector(noteId);
+      noteToDelete.remove();
     },
     updateNoteListItem: function(note){
       let notesListItems = Array.from(document.querySelectorAll(selectors.notesListItem));

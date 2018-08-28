@@ -46,6 +46,14 @@ export const NoteCtrl = (function(){
       });
       return match;
     },
+    deleteNote: function(id){
+      const notesListIds = data.notes.map(note => {
+        return note.id;
+      });
+      const index = notesListIds.indexOf(id);
+
+      data.notes.splice(index, 1);
+    },
     getNoteById: function(id){
       let matchNote = null;
       data.notes.forEach(note => {
