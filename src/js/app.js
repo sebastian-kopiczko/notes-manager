@@ -27,7 +27,7 @@ const App = (function(NoteCtrl, StorageCtrl, UICtrl){
       const newNote = NoteCtrl.addNote(input.title, input.body, input.priority, input.date);
       UICtrl.clearInputs();
       UICtrl.addNoteListItem(newNote);
-      StorageCtrl.storeNote(newNote);
+      StorageCtrl.addStorageNote(newNote);
       UICtrl.showAlert('success', 'Notatka dodana pomyslnie')
     }
     e.preventDefault();
@@ -58,6 +58,7 @@ const App = (function(NoteCtrl, StorageCtrl, UICtrl){
     const currentNote = NoteCtrl.getCurrentNote();
     NoteCtrl.deleteNote(currentNote.id);
     UICtrl.deleteNoteListItem(currentNote.id);
+    StorageCtrl.deleteStorageNote(currentNote.id);
     UICtrl.clearEditState();
     e.preventDefault();
   }

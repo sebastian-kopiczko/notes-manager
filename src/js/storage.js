@@ -1,6 +1,6 @@
 export const StorageCtrl = (function () {
   return {
-    storeNote: function (note) {
+    addStorageNote: function (note) {
       let notes;
       if (localStorage.getItem('notes') === null) {
         notes = [];
@@ -26,6 +26,15 @@ export const StorageCtrl = (function () {
       notes.forEach((note, index) => {
         if(updatedNote.id === note.id){
           notes.splice(index, 1, updatedNote);
+        }
+      });
+      localStorage.setItem('notes', JSON.stringify(notes));
+    },
+    deleteStorageNote: function(deletedNoteId){
+      let notes = JSON.parse(localStorage.getItem('notes'));
+      notes.forEach((note, index) => {
+        if(deletedNoteId === note.id){
+          notes.splice(index, 1);
         }
       });
       localStorage.setItem('notes', JSON.stringify(notes));
