@@ -11,6 +11,7 @@ const App = (function(NoteCtrl, StorageCtrl, UICtrl){
 
     document.querySelector(UISelectors.addButton).addEventListener('click', itemAddSubmit);
     document.querySelector(UISelectors.notesList).addEventListener('click', noteEditClick);
+    document.querySelector(UISelectors.updateButton).addEventListener('click', noteUpdateSubmit);
   }
  
   const itemAddSubmit = function(e){
@@ -39,6 +40,13 @@ const App = (function(NoteCtrl, StorageCtrl, UICtrl){
       NoteCtrl.setCurrentNote(noteToEdit);
       UICtrl.setInputsToEdit();
     }
+    e.preventDefault();
+  }
+
+  const noteUpdateSubmit = function(e){
+    const noteInput = UICtrl.getNotesInput();
+    const updatedNote = NoteCtrl.updateNote(noteInput.title, noteInput.body, noteInput.priority, noteInput.date);
+    UICtrl.updateNoteListItem(updatedNote);
     e.preventDefault();
   }
   return {

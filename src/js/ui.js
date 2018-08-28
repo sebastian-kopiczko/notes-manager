@@ -9,6 +9,7 @@ export const UICtrl = (function(){
     dateInput: '#date-input',
     bodyInput: '#body-input',
     notesList: '#notes-list',
+    notesListItem: '.list-item',
     addButton: '.add-button',
     updateButton: '.update-button',
     deleteButton: '.delete-button',
@@ -71,6 +72,17 @@ export const UICtrl = (function(){
       `
       list.insertAdjacentElement('beforeend', li);
       document.querySelector(selectors.notesList).style.display = 'block';
+    },
+    updateNoteListItem: function(note){
+      let notesListItems = Array.from(document.querySelectorAll(selectors.notesListItem));
+
+      notesListItems.forEach(listItem => {
+        const listItemId = listItem.getAttribute('id');
+
+        if(listItemId === `item-${note.id}`){
+          console.log(`${listItemId} ${note.id}, ${document.querySelector(listItemId)}`);
+        }
+      });
     },
     showEditState: function(){
       UICtrl.showElement(selectors.updateButton, 'inline-block');
