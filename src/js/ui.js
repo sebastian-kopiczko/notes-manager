@@ -79,8 +79,14 @@ export const UICtrl = (function(){
       notesListItems.forEach(listItem => {
         const listItemId = listItem.getAttribute('id');
 
-        if(listItemId === `item-${note.id}`){
-          console.log(`${listItemId} ${note.id}, ${document.querySelector(listItemId)}`);
+        if(listItemId === `note-${note.id}`){
+          console.log(listItem.getElementsByTagName('header'));
+          listItem.getElementsByTagName('header')[0].innerHTML = `
+            <h3 class="list-item__heading">${note.title}</h3>
+            <span class="label">${note.priority}</span>
+            <span class="label date">${note.date}</span>
+          `
+          listItem.getElementsByTagName('p')[0].innerHTML = note.body;
         }
       });
     },
