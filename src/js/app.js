@@ -49,6 +49,7 @@ const App = (function(NoteCtrl, StorageCtrl, UICtrl){
     const noteInput = UICtrl.getNotesInput();
     const updatedNote = NoteCtrl.updateNote(noteInput.title, noteInput.body, noteInput.priority, noteInput.date);
     UICtrl.updateNoteListItem(updatedNote);
+    StorageCtrl.updateStorageNote(updatedNote);
     UICtrl.clearEditState();
     e.preventDefault();
   }
@@ -57,13 +58,13 @@ const App = (function(NoteCtrl, StorageCtrl, UICtrl){
     const currentNote = NoteCtrl.getCurrentNote();
     NoteCtrl.deleteNote(currentNote.id);
     UICtrl.deleteNoteListItem(currentNote.id);
+    UICtrl.clearEditState();
     e.preventDefault();
   }
 
   return {
     init: function(){
       UICtrl.clearEditState();
-      // get items from data structure
       const notes = NoteCtrl.getNotes();
       if(notes.length === 0){
         UICtrl.hideElement('#notes-list');

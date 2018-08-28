@@ -20,6 +20,15 @@ export const StorageCtrl = (function () {
         notes = JSON.parse(localStorage.getItem('notes'));
       }
       return notes;
+    },
+    updateStorageNote: function(updatedNote){
+      let notes = JSON.parse(localStorage.getItem('notes'));
+      notes.forEach((note, index) => {
+        if(updatedNote.id === note.id){
+          notes.splice(index, 1, updatedNote);
+        }
+      });
+      localStorage.setItem('notes', JSON.stringify(notes));
     }
   }
 })();
