@@ -12,51 +12,53 @@
 <body>
   <nav>
     <a href="#" class="brand">
-      <h3>Notes Manager</h3>
+      <h2>Notatki</h2>
     </a>
   </nav>
-  <div class="flex one">
-    <article class="card">
-      <header>
-        <h3>Dodaj notatkę / Edytuj</h3>
-      </header>
-      <fieldset>
-        <div class="flex one two-500">
-          <div>
-            <div class="input-field">
-              <label for="note-title">
-                <input type="text" id="title-input" placeholder="Tytuł notatki">
-              </label>
+  <div class="flex one center">
+    <div class="one three-fifth-600">
+      <article id="note-form" class="card">
+        <header>
+          <h3></h3>
+        </header>
+        <div class="flex one two-650">
+          <fieldset>
+            <div>
+              <div class="input-field">
+                <label for="note-title">
+                  <input type="text" id="title-input" placeholder="Tytuł notatki">
+                </label>
+              </div>
+              <div class="input-field">
+                <select name="" id="priority-input">
+                  <option disabled selected>Wybierz priorytet</option>
+                  <option>niski</option>
+                  <option>średni</option>
+                  <option>wysoki</option>
+                </select>
+              </div>
+              <div class="input-field">
+                <input id="date-input" type="date" value="2018-08-25">
+              </div>
             </div>
-            <div class="input-field">
-              <select name="" id="priority-input">
-                <option disabled selected>Wybierz priorytet</option>
-                <option>niski</option>
-                <option>średni</option>
-                <option>wysoki</option>
-              </select>
+            <div>
+              <div class="input-field">
+                <textarea id="body-input" placeholder="Treść"></textarea>
+              </div>
             </div>
-            <div class="input-field">
-              <input id="date-input" type="date" value="2018-08-25">
+            <div class="full buttons">
+              <button class='add-button success'>Add note</button>
+              <button class='update-button'>Update</button>
+              <button class='delete-button error'>Delete</button>
+              <button class='back-button warning'>Back</button>
             </div>
-          </div>
-          <div>
-            <div class="input-field">
-              <textarea id="body-input" placeholder="Treść"></textarea>
-            </div>
-          </div>
-          <div class="full buttons">
-            <button class='add-button success'>Add note</button>
-            <button class='update-button'>Update</button>
-            <button class='delete-button error'>Delete</button>
-            <button class='back-button warnings'>Back</button>
-          </div>
         </div>
-      </fieldset>
-    </article>
-  </div>
-  <div class="notes">
-    <ul id="notes-list" class="list"></ul>
+        </fieldset>
+      </article>
+    </div>
+    <div class="notes three-fifth-600">
+      <ul id="notes-list" class="list"></ul>
+    </div>
   </div>
   <script src="/build/app.bundle.js"></script>
 </body>

@@ -4,6 +4,7 @@ export const UICtrl = (function(){
   const selectors = {
     nav: 'nav',
     alert: '.alert',
+    noteFormHeading: '#note-form h3',
     titleInput: '#title-input',
     priorityInput: '#priority-input',
     dateInput: '#date-input',
@@ -94,12 +95,14 @@ export const UICtrl = (function(){
       });
     },
     showEditState: function(){
+      document.querySelector(selectors.noteFormHeading).textContent = 'Edycja notatki';
       UICtrl.showElement(selectors.updateButton, 'inline-block');
       UICtrl.showElement(selectors.deleteButton, 'inline-block');
       UICtrl.showElement(selectors.backButton, 'inline-block');
       UICtrl.hideElement(selectors.addButton);
     },
     clearEditState: function(){
+      document.querySelector(selectors.noteFormHeading).textContent = 'Dodaj notatkę';
       UICtrl.clearInputs();
       UICtrl.hideElement(selectors.updateButton);
       UICtrl.hideElement(selectors.deleteButton);
