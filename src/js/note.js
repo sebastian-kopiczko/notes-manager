@@ -40,7 +40,8 @@ export const NoteCtrl = (function(){
         if(note.id === data.currentNote.id){
           note.title = title;
           note.body = body; 
-          note.priority = priority;
+          note.priorityVal = priority.val;
+          note.priorityText = priority.text;
           note.date = date;
           match = note;
         }
