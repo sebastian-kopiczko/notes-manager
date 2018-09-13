@@ -89,12 +89,13 @@ export const UICtrl = (function () {
         const listItemId = listItem.getAttribute('id');
 
         if (listItemId === `note-${note.id}`) {
+          listItem.getElementsByTagName('h3')[0].innerHTML = note.title;
           listItem.getElementsByClassName('note__top-bar')[0].innerHTML = `
-            <span class="note__priority">${note.priority}</span>
+            <span class="note__priority button ${note.priorityVal}">${note.priorityText}</span>
             <span class="note__date date">${note.date}</span>
-            <a href="#" class="button success edit-note">edit</a>
+            <a href="#" class="button edit-note">Edytuj</a>
           `
-          listItem.getElementsByTagName('p')[0].innerHTML = note.body;
+          listItem.getElementsByTagName('p')[0].textContent = note.body;
         }
       });
     },
@@ -117,7 +118,7 @@ export const UICtrl = (function () {
       const note = NoteCtrl.getCurrentNote();
       document.querySelector(selectors.titleInput).value = note.title;
       document.querySelector(selectors.bodyInput).value = note.body;
-      document.querySelector(selectors.priorityInput).value = note.priority;
+      document.querySelector(selectors.priorityInput).value = note.priorityVal;
       document.querySelector(selectors.dateInput).value = note.date;
 
       UICtrl.showEditState();
@@ -129,11 +130,11 @@ export const UICtrl = (function () {
       document.querySelector(selectors.dateInput).value = getTodayDate();
     },
     showAlert(className, alertText) {
-      const nav = document.querySelector(selectors.noteEditor);
+      const editor = document.querySelector(selectors.noteEditor);
       const alertDiv = document.createElement('div');
-      alertDiv.className = (`alert label ${className}`);
+      alertDiv.className = (`alert label ${className} centered`);
       alertDiv.appendChild(document.createTextNode(alertText));
-      nav.insertAdjacentElement('afterend', alertDiv);
+      editor.insertAdjacentElement('beforebegin', alertDiv);
       setTimeout(() => {
         UICtrl.clearAlert();
       }, 2500)
