@@ -12,55 +12,53 @@
 <body>
   <nav>
     <a href="#" class="brand">
-      <h2>Notatki</h2>
+      <h2>Twój notatnik</h2>
     </a>
   </nav>
-  <div class="flex one center">
-    <div class="one three-fifth-600">
-      <article id="note-form" class="card">
-        <header>
-          <h3></h3>
-        </header>
-        <div class="flex one two-650">
-          <fieldset>
-            <div>
-              <div class="input-field">
-                <label for="note-title">
-                  <input type="text" id="title-input" placeholder="Tytuł notatki">
-                </label>
-              </div>
-              <div class="input-field">
-                <select name="" id="priority-input">
-                  <option disabled selected>Wybierz priorytet</option>
-                  <option>niski</option>
-                  <option>średni</option>
-                  <option>wysoki</option>
-                </select>
-              </div>
-              <div class="input-field">
-                <input id="date-input" type="date" value="2018-08-25">
-              </div>
+  <!-- app -->
+  <div class="app">
+    <!-- container -->
+    <div class="flex center six-800">
+      <!-- add/edit note form -->
+      <div class="half-800">  
+        <article id="note-form" class="note__editor editor">
+          <header>
+            <h3 class="editor__heading"></h3>
+          </header>
+          <div class="editor__inner">
+            <fieldset>
+              <label for="note-title">
+                <input type="text" id="title-input" placeholder="Tytuł notatki">
+              </label>
+              <select name="" id="priority-input">
+                <option disabled selected hidden>Wybierz priorytet</option>
+                <option value="success">niski</option>
+                <option value="warning">średni</option>
+                <option value="error">wysoki</option>
+              </select>
+              <input id="date-input" type="date" value="2018-08-25">
+              <textarea id="body-input" placeholder="Treść"></textarea>
+            </fieldset>
+            <div class="editor__buttons">
+              <button class="add-button success">Dodaj</button>
+              <button class="update-button">Aktualizuj</button>
+              <button class="delete-button error">Usuń</button>
+              <button class="back-button warning">Powrót</button>
             </div>
-            <div>
-              <div class="input-field">
-                <textarea id="body-input" placeholder="Treść"></textarea>
-              </div>
-            </div>
-            <div class="full buttons">
-              <button class='add-button success'>Add note</button>
-              <button class='update-button'>Update</button>
-              <button class='delete-button error'>Delete</button>
-              <button class='back-button warning'>Back</button>
-            </div>
-        </div>
-        </fieldset>
-      </article>
+          <!-- end editor inner   -->
+          </div>
+        <!-- end add/edit note form -->
+        </article>
+      </div>
+      <!-- notes list -->
+      <div class="notes__list full half-800">
+        <ul id="notes-list" class="list flex center"></ul>
+      <!-- end notes list -->
+      </div>
+    <!-- container -->
     </div>
-    <div class="notes three-fifth-600">
-      <ul id="notes-list" class="list"></ul>
-    </div>
-  </div>
-  <script src="/build/app.bundle.js"></script>
+  <!-- end app -->
+  <script src="./build/app.bundle.js"></script>
 </body>
 
 </html>
