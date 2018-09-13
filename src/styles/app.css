@@ -1,22 +1,70 @@
-body {
-  margin: 4.6em 1em 1em 1em;
-
+.app{
+  padding: 3.5em 0.5em;
+  max-width: 1050px;
+  margin: 0 auto;
 }
-.buttons > button:not(:first-child){
-  margin-left: 0.5em;
+@media (min-width: 500px){
+  .app{
+    padding: 4em 1em;
+  }
 }
-.card {
-  padding: 0 0.5em;
+.editor{
+  margin: 0 auto;
+  max-width: 25em;
 }
-.input-field {
-  margin: 0.5em 0;
+@media (min-width: 800px){
+  .editor{
+    padding-right: 1em;
+  }
+}
+.editor input, .editor select{
+  margin-bottom: 0.3em;
+}
+.editor__buttons{
+  display: flex;
+  justify-content: space-evenly;
 }
 .list{
   padding: 0;
 }
 .list-item {
   list-style: none;
+  padding: 0;
 }
 .list-item .button {
   font-size: 0.75em;
+}
+@media (min-width: 800px){
+  .notes__list{
+    padding-top: 2em;
+  }
+}
+.note{
+  border: 1px solid #ddd;
+  max-width: 35em;
+}
+.note:not(:last-child){
+  border-bottom: none;
+}
+.note__top-bar{
+  padding: 0 .5em;
+  display: flex;
+  background: #dee8ec;
+  justify-content: space-between;
+  align-content: stretch;
+  height: 2em;
+}
+.note__top-bar span{
+  line-height: 2em;
+  vertical-align: middle;
+}
+.note__inner{
+  padding: 0 .5em;
+}
+.note__body{
+  margin: 0;
+  padding-bottom: .5em;
+}
+.note__priority{
+  padding: .2em .4em;
 }
