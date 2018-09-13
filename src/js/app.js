@@ -50,6 +50,7 @@ const App = (function(NoteCtrl, StorageCtrl, UICtrl){
     const updatedNote = NoteCtrl.updateNote(noteInput.title, noteInput.body, noteInput.priority, noteInput.date);
     UICtrl.updateNoteListItem(updatedNote);
     StorageCtrl.updateStorageNote(updatedNote);
+    UICtrl.showAlert('success', 'Notatka zaktualizowana')
     UICtrl.clearEditState();
     e.preventDefault();
   }
@@ -59,6 +60,7 @@ const App = (function(NoteCtrl, StorageCtrl, UICtrl){
     NoteCtrl.deleteNote(currentNote.id);
     UICtrl.deleteNoteListItem(currentNote.id);
     StorageCtrl.deleteStorageNote(currentNote.id);
+    UICtrl.showAlert('error', 'Notatka usunięta')
     UICtrl.clearEditState();
     e.preventDefault();
   }
