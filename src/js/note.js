@@ -2,11 +2,12 @@ import { StorageCtrl } from "./storage";
 
 export const NoteCtrl = (function(){
   // notes item constructor
-  const Note = function(id, title, body, priority, date){
+  const Note = function(id, title, body, priorityVal, priorityText, date){
     this.id = id;
     this.title = title;
     this.body = body;
-    this.priority = priority;
+    this.priorityVal = priorityVal;
+    this.priorityText = priorityText;
     this.date = date;
   }
 
@@ -25,7 +26,7 @@ export const NoteCtrl = (function(){
         id = 0;
       }
 
-      const newNote = new Note(id, title, body, priority, date);
+      const newNote = new Note(id, title, body, priority.val, priority.text, date);
       data.notes.push(newNote);
 
       return newNote;
