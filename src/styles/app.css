@@ -8,8 +8,11 @@
     padding: 4em 1em;
   }
 }
+nav{
+  padding: 0 5%;
+}
 .editor{
-  margin: 0 auto;
+  margin: 0 auto 1em auto;
   max-width: 25em;
 }
 @media (min-width: 800px){
@@ -26,6 +29,7 @@
 }
 .list{
   padding: 0;
+  margin: 0 auto;
 }
 .list-item {
   list-style: none;
@@ -33,6 +37,9 @@
 }
 .list-item .button {
   font-size: 0.75em;
+}
+.notes__list{
+  padding-left: 0;
 }
 @media (min-width: 800px){
   .notes__list{
@@ -67,4 +74,7 @@
 }
 .note__priority{
   padding: .2em .4em;
+}
+.centered{
+  margin: 0 auto;
 }
