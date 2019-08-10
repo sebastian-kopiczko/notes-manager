@@ -1,6 +1,6 @@
-import { NoteCtrl } from "./note";
+import { NoteCtrl } from './note';
 
-export const UICtrl = (function () {
+export const UICtrl = (function() {
   const selectors = {
     nav: 'nav',
     alert: '.alert',
@@ -16,35 +16,48 @@ export const UICtrl = (function () {
     updateButton: '.update-button',
     deleteButton: '.delete-button',
     backButton: '.back-button'
-  }
-  const getTodayDate = function () {
+  };
+  const getTodayDate = function() {
     const dateNow = new Date();
-    let dateUTC = new Date(Date.UTC(dateNow.getFullYear(), dateNow.getMonth(), dateNow.getDate()))
+    let dateUTC = new Date(
+      Date.UTC(dateNow.getFullYear(), dateNow.getMonth(), dateNow.getDate())
+    );
     return dateUTC.toISOString().slice(0, 10);
-  }
+  };
   return {
-    getSelectors: function () {
+    getSelectors: function() {
       return selectors;
     },
-    getNotesInput: function () {
+    getNotesInput: function() {
       const priorityInput = document.querySelector(selectors.priorityInput);
+      let priorityLabel, priorityVal;
+      if (priorityInput.value === 'default') {
+        priorityLabel = 'Brak priorytetu';
+        priorityVal = 'pseudo';
+      } else {
+        priorityLabel = priorityInput.selectedOptions[0].text;
+        priorityVal = priorityInput.value;
+      }
       return {
         title: document.querySelector(selectors.titleInput).value,
         priority: {
-          val: priorityInput.value,
-          text: priorityInput.selectedOptions[0].text
+          val: priorityVal,
+          // text: priorityInput.selectedOptions[0].text
+          text: priorityLabel
         },
         date: document.querySelector(selectors.dateInput).value,
         body: document.querySelector(selectors.bodyInput).value
-      }
+      };
     },
-    createNotesList: function (notes) {
+    createNotesList: function(notes) {
       let html = '';
       notes.forEach(note => {
         html += `
           <li class="note list-item stack" id="note-${note.id}">
             <div class="note__top-bar">
-              <span class="note__priority button ${note.priorityVal}">${note.priorityText}</span>
+                <span class="note__priority button ${note.priorityVal}">${
+          note.priorityText
+        }</span>
               <span class="note__date date">${note.date}</span>
               <a href="#" class="button edit-note">Edytuj</a>
             </div>
@@ -53,19 +66,21 @@ export const UICtrl = (function () {
               <p class="block note__body">${note.body}</p>
             </div>
           </li>
-        `
+        `;
       });
       const list = document.getElementById('notes-list');
       list.insertAdjacentHTML('afterbegin', html);
     },
-    addNoteListItem: function (note) {
+    addNoteListItem: function(note) {
       const list = document.querySelector(selectors.notesList);
       const li = document.createElement('li');
       li.className = 'note list-item stack';
       li.id = `note-${note.id}`;
       li.innerHTML = `
         <div class="note__top-bar">
-          <span class="note__priority button ${note.priorityVal}">${note.priorityText}</span>
+          <span class="note__priority button ${note.priorityVal}">${
+        note.priorityText
+      }</span>
           <span class="note__date date">${note.date}</span>
           <a href="#" class="button edit-note">Edytuj</a>
         </div>
@@ -73,17 +88,19 @@ export const UICtrl = (function () {
           <h3 class="note__title">${note.title}</h3>
           <p class="block note__body">${note.body}</p>
         </div>
-      `
+      `;
       list.insertAdjacentElement('beforeend', li);
       document.querySelector(selectors.notesList).style.display = 'block';
     },
-    deleteNoteListItem: function (id) {
+    deleteNoteListItem: function(id) {
       const noteId = `#note-${id}`;
       const noteToDelete = document.querySelector(noteId);
       noteToDelete.remove();
     },
-    updateNoteListItem: function (note) {
-      let notesListItems = Array.from(document.querySelectorAll(selectors.notesListItem));
+    updateNoteListItem: function(note) {
+      let notesListItems = Array.from(
+        document.querySelectorAll(selectors.notesListItem)
+      );
 
       notesListItems.forEach(listItem => {
         const listItemId = listItem.getAttribute('id');
@@ -91,23 +108,27 @@ export const UICtrl = (function () {
         if (listItemId === `note-${note.id}`) {
           listItem.getElementsByTagName('h3')[0].innerHTML = note.title;
           listItem.getElementsByClassName('note__top-bar')[0].innerHTML = `
-            <span class="note__priority button ${note.priorityVal}">${note.priorityText}</span>
+            <span class="note__priority button ${note.priorityVal}">${
+            note.priorityText
+          }</span>
             <span class="note__date date">${note.date}</span>
             <a href="#" class="button edit-note">Edytuj</a>
-          `
+          `;
           listItem.getElementsByTagName('p')[0].textContent = note.body;
         }
       });
     },
-    showEditState: function () {
-      document.querySelector(selectors.noteFormHeading).textContent = 'Edycja notatki';
+    showEditState: function() {
+      document.querySelector(selectors.noteFormHeading).textContent =
+        'Edycja notatki';
       UICtrl.showElement(selectors.updateButton, 'inline-block');
       UICtrl.showElement(selectors.deleteButton, 'inline-block');
       UICtrl.showElement(selectors.backButton, 'inline-block');
       UICtrl.hideElement(selectors.addButton);
     },
-    clearEditState: function () {
-      document.querySelector(selectors.noteFormHeading).textContent = 'Dodaj notatkę';
+    clearEditState: function() {
+      document.querySelector(selectors.noteFormHeading).textContent =
+        'Dodaj notatkę';
       UICtrl.clearInputs();
       UICtrl.hideElement(selectors.updateButton);
       UICtrl.hideElement(selectors.deleteButton);
@@ -123,21 +144,23 @@ export const UICtrl = (function () {
 
       UICtrl.showEditState();
     },
-    clearInputs: function () {
+    clearInputs: function() {
       document.querySelector(selectors.titleInput).value = '';
       document.querySelector(selectors.bodyInput).value = '';
-      document.querySelector(selectors.priorityInput).options[0].selected = true;
+      document.querySelector(
+        selectors.priorityInput
+      ).options[0].selected = true;
       document.querySelector(selectors.dateInput).value = getTodayDate();
     },
     showAlert(className, alertText) {
       const editor = document.querySelector(selectors.noteEditor);
       const alertDiv = document.createElement('div');
-      alertDiv.className = (`alert label ${className} centered`);
+      alertDiv.className = `alert label ${className} centered`;
       alertDiv.appendChild(document.createTextNode(alertText));
       editor.insertAdjacentElement('beforebegin', alertDiv);
       setTimeout(() => {
         UICtrl.clearAlert();
-      }, 2500)
+      }, 2500);
     },
     clearAlert() {
       const alert = document.querySelector(selectors.alert);
@@ -145,11 +168,11 @@ export const UICtrl = (function () {
         alert.remove();
       }
     },
-    showElement: function (elem, displayStyle) {
+    showElement: function(elem, displayStyle) {
       document.querySelector(elem).style.display = displayStyle;
     },
-    hideElement: function (elem) {
+    hideElement: function(elem) {
       document.querySelector(elem).style.display = 'none';
     }
-  }
+  };
 })();
